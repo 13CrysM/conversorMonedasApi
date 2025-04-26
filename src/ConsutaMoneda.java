@@ -18,12 +18,10 @@ public class ConsutaMoneda {
         try {
             HttpResponse<String> response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("Consulta exitosa");
             return new Gson().fromJson(response.body(), Moneda.class);
         } catch (Exception e) {
             throw new RuntimeException("Moneda no enconrada.");
         }
-
-        /*String json = response.body();
-        System.out.println(json);*/
     }
 }
