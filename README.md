@@ -1,35 +1,27 @@
-README - Sistema de Conversión de Divisas 💰
-📌 Descripción
-Este proyecto es un conversor de divisas desarrollado en Java que permite obtener tasas de cambio en tiempo real y realizar conversiones entre diferentes monedas. El sistema se conecta a la API de ExchangeRate-API para obtener los datos más actualizados.
+# README - Sistema de Conversión de Divisas 💰
+## 📌 Descripción
+Este proyecto es un conversor de divisas desarrollado en Java que permite obtener tasas de cambio en tiempo real y realizar conversiones entre diferentes monedas. 
+El sistema se conecta a la API de ExchangeRate-API para obtener los datos más actualizados.
 
-🌟 Características Principales
-✅ Conversión en tiempo real entre múltiples divisas
+## 🌟 Características Principales
+* ✅ Conversión en tiempo real entre múltiples divisas
+* ✅ Soporte para 12 monedas diferentes (USD, EUR, GBP, CHF, JPY, HKD, CAD, CNY, AUD, BRL, RUB, MXN)
+* ✅ Interfaz de usuario intuitiva por consola
+* ✅ Validación de entradas del usuario
+* ✅ Manejo de errores en conexiones API
 
-✅ Soporte para 12 monedas diferentes (USD, EUR, GBP, CHF, JPY, HKD, CAD, CNY, AUD, BRL, RUB, MXN)
+## 🛠️ Tecnologías Utilizadas
+* Java 17+
+* HTTP Client de Java (para conexiones API)
+* Gson (para parseo de JSON)
+* ExchangeRate-API (fuente de datos)
 
-✅ Interfaz de usuario intuitiva por consola
+## 📥 Instalación y Ejecución
+### Requisitos previos:
+1. JDK 17 o superior instalado
+2. Conexión a Internet (para acceder a la API)
 
-✅ Validación de entradas del usuario
-
-✅ Manejo de errores en conexiones API
-
-🛠️ Tecnologías Utilizadas
-Java 17+
-
-HTTP Client de Java (para conexiones API)
-
-Gson (para parseo de JSON)
-
-ExchangeRate-API (fuente de datos)
-
-📥 Instalación y Ejecución
-Requisitos previos:
-
-JDK 17 o superior instalado
-
-Conexión a Internet (para acceder a la API)
-
-Pasos para ejecutar:
+### Pasos para ejecutar:
 
 bash
 # Clonar el repositorio
@@ -43,7 +35,7 @@ javac -cp .:gson-2.8.9.jar Principal.java
 
 # Ejecutar
 java -cp .:gson-2.8.9.jar Principal
-🖥️ Uso del Programa
+## 🖥️ Uso del Programa
 Al iniciar el programa, verás un mensaje de bienvenida.
 
 Ingresa el código de la divisa de origen (ej. "USD", "EUR", "MXN").
@@ -56,7 +48,7 @@ El programa mostrará el resultado de la conversión.
 
 Puedes realizar múltiples conversiones o salir con la opción 0.
 
-📷 Capturas de Pantalla
+## 📷 Capturas de Pantalla
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 *- Bienvenido al sistema de conversión de divisas -*
 
@@ -74,17 +66,17 @@ Selecciona una opción válida (1-12):
 Ingresa la cantidad a convertir:
 100
 La cantidad de: 100.00 MXN equivalen a: 5.92 USD
-📊 Estructura del Proyecto
+## 📊 Estructura del Proyecto
 src/
 ├── Principal.java            # Punto de entrada del programa
 ├── ConsultaMoneda.java       # Maneja las consultas a la API
 ├── ConversorDivisa.java      # Lógica de conversión de divisas
 ├── Moneda.java               # Modelo para datos de par de divisas
 └── TasasMoneda.java          # Modelo para tasas de cambio
-🤝 Contribuciones
+## 🤝 Contribuciones
 Las contribuciones son bienvenidas. Por favor abre un issue o pull request con tus sugerencias.
 
-📜 Licencia
+## 📜 Licencia
 Este proyecto está bajo la licencia MIT. Ver el archivo LICENSE para más detalles.
 
 Desarrollado con ❤️ por [Tu Nombre] | [2023]
