@@ -1,18 +1,32 @@
 import java.util.Map;
 
 public class ConversorDivisa {
-    private final Map<String, Double> tasas;
+    //private final Map<String, Double> tasas;
     private final String base;
+    private final String destino;
+    private final double tasa;
 
     public ConversorDivisa(Moneda moneda) {
-        this.tasas = moneda.conversion_rates();
+        this.destino = moneda.target_code();
         this.base = moneda.base_code();
+        this.tasa = moneda.conversion_rate();
 
-        System.out.println("tasas de Conversor" +tasas);
-        System.out.println("base de Conversor" + base);
+        System.out.println("tasa de Conversor " + tasa);
+        System.out.println("target de Conversor " + destino);
+        System.out.println("base de Conversor " + base);
+
     }
 
-    public void convertir (double cantidad, String[] divisasDestino){
+    public double convertir(double cantidad, String destino){
+        //Double tasa = tasas.get(divisasDestino);
+        if (tasa > 0) {
+            return cantidad * tasa;
+        } else {
+            throw new IllegalArgumentException("No se encontro tasa de destino: " + destino);
+        }
+    }
+
+    /*public void convertir (double cantidad, String[] divisasDestino){
         System.out.printf("Cantidad a convertir: %.2f %s%n", cantidad, base);
         for (String destino : divisasDestino){
             System.out.println("Destino: " + destino);
@@ -26,5 +40,5 @@ public class ConversorDivisa {
                 System.out.println("No se encontro tasa para: " + destino);
             }
         }
-    }
+    }*/
 }

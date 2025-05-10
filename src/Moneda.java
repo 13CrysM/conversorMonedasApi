@@ -1,5 +1,3 @@
-import java.util.Map;
-
 public record Moneda(
         String result,
         String documentation,
@@ -9,5 +7,6 @@ public record Moneda(
         long time_next_update_unix,
         String time_next_update_utc,
         String base_code,
-        Map<String, Double> conversion_rates) {
+        String target_code,
+        double conversion_rate){
 }
