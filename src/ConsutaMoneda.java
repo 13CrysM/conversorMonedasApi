@@ -17,7 +17,7 @@ public class ConsutaMoneda {
         try {
             HttpResponse<String> response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("Consulta moneda origen, exitosa");
+            //System.out.println("Consulta moneda origen, exitosa");
             return new Gson().fromJson(response.body(), TasasMoneda.class);
         } catch (Exception e) {
             throw new RuntimeException("Moneda no enconrada.");
@@ -35,7 +35,7 @@ public class ConsutaMoneda {
         try {
             HttpResponse<String> response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("Consulta exitosa");
+            //System.out.println("Consulta exitosa");
             return new Gson().fromJson(response.body(), Moneda.class);
         } catch (Exception e) {
             throw new RuntimeException("Moneda no enconrada.");

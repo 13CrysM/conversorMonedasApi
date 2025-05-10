@@ -11,9 +11,9 @@ public class ConversorDivisa {
         this.base = moneda.base_code();
         this.tasa = moneda.conversion_rate();
 
-        System.out.println("tasa de Conversor " + tasa);
+        /*System.out.println("tasa de Conversor " + tasa);
         System.out.println("target de Conversor " + destino);
-        System.out.println("base de Conversor " + base);
+        System.out.println("base de Conversor " + base);*/
 
     }
 
@@ -25,20 +25,4 @@ public class ConversorDivisa {
             throw new IllegalArgumentException("No se encontro tasa de destino: " + destino);
         }
     }
-
-    /*public void convertir (double cantidad, String[] divisasDestino){
-        System.out.printf("Cantidad a convertir: %.2f %s%n", cantidad, base);
-        for (String destino : divisasDestino){
-            System.out.println("Destino: " + destino);
-            Double tasa = tasas.get(destino);
-            System.out.println("Tasa (for):" + tasa);
-            if (tasa != null) {
-                double resultado = cantidad * tasa;
-                //System.out.printf("%.2f %s = %.4f %s%n", cantidad, base, resultado);
-                System.out.printf("%.2f %s = %.4f %s%n", cantidad, base, resultado, destino);
-            } else {
-                System.out.println("No se encontro tasa para: " + destino);
-            }
-        }
-    }*/
 }

@@ -3,72 +3,6 @@ import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) throws IOException, InterruptedException {
-        /*S
-        while (true) {
-            System.out.println("\nEscribe el código de la divisa ORIGEN (ejemplo: USD, EUR, MXN) o escribe 'Q' para salir del sistema:");
-            String origen = lectura.nextLine().trim().toUpperCase();
-            if (origen.equals("Q")) {
-                System.out.println("¡Gracias por utilizar el conversor de divisas!");
-                break;
-            }
-
-            try {
-                TasasMoneda tasasMoneda = consulta.buscaMoneda(origen);
-                if (tasasMoneda.base_code().equalsIgnoreCase(origen)) {
-                    break;
-                } else {
-                    System.out.println("Código no válido");
-                }
-            } catch (Exception e) {
-                System.out.println("Error validación de código, " + e);
-            }
-
-
-        System.out.println(menu);
-
-        System.out.println("\nSelecciona una opción (1 - 12):  ");
-        String opcion = lectura.nextLine().trim();
-        if (opcion.equalsIgnoreCase("0")){
-            System.out.println("¡Gracias por utilizar el conversor de divisas!");
-            lectura.close();
-            return;
-        }
-        int indice;
-        try {
-            indice = Integer.parseInt(opcion);
-            if (indice < 1 || indice > 12) {
-                System.out.println("Opción no válida.");
-                continue;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Opción no válida.");
-            continue;
-        }
-
-        // Solicitar cantidad a convertir
-        System.out.println("Ingresa la cantidad a convertir:");
-        String cantidadTexto = lectura.nextLine().trim();
-        double cantidad;
-        try {
-            cantidad = Double.parseDouble(cantidadTexto);
-        } catch (NumberFormatException e) {
-            System.out.println("Cantidad no válida.");
-            continue;
-        }
-
-        // Ejecutar conversión
-        String destino = divisasObjetivo[indice - 1];
-        try {
-            Moneda moneda = consulta.buscaParMonedas(origen, destino);
-            ConversorDivisa conversor = new ConversorDivisa(moneda);
-            double resultado = conversor.convertir(cantidad, destino);
-            System.out.printf("La cantidad de: %.2f %s equivalen a: %.2f %s%n",
-                    cantidad, moneda.base_code(), resultado, destino);
-        } catch (Exception e) {
-            System.out.println("Error con la tasa de cambio: " + e.getMessage());
-        }
-
-    }*/
         Scanner lectura = new Scanner(System.in);
         ConsutaMoneda consulta = new ConsutaMoneda();
         String[] divisasObjetivo = {"USD", "EUR", "GBP", "CHF", "JPY", "HKD", "CAD", "CNY", "AUD", "BRL", "RUB", "MXN"};
@@ -141,7 +75,7 @@ public class Principal {
                 continue;
             }
 
-            // Solicitar cantidad a convertir
+            // Solicitar cantidad a convertir y validación
             System.out.println("Ingresa la cantidad a convertir:");
             String cantidadTexto = lectura.nextLine().trim();
             double cantidad;
@@ -152,7 +86,7 @@ public class Principal {
                 continue;
             }
 
-            // Ejecutar conversión
+            // Realiza la conversión
             String destino = divisasObjetivo[indice - 1];
             try {
                 Moneda moneda = consulta.buscaParMonedas(origen, destino);
