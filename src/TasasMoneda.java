@@ -1,4 +1,6 @@
-public record Moneda(
+import java.util.Map;
+
+public record TasasMoneda(
         String result,
         String documentation,
         String terms_of_use,
@@ -7,6 +9,5 @@ public record Moneda(
         long time_next_update_unix,
         String time_next_update_utc,
         String base_code,
-        String target_code,
-        double conversion_rate){
+        Map<String, Double> conversion_rates) {
 }
