@@ -45,11 +45,10 @@ El sistema se conecta a la API de ExchangeRate-API para obtener los datos más a
 ![Caprura5](resources/image-06.png)
 
 ---
-## 🤝 Contribuciones
-Las contribuciones son bienvenidas. Por favor abre un issue o pull request con tus sugerencias.
-
-Desarrollado con ❤️ por [Tu Nombre] | [2023]
 ## 👥 Autores
 
 - **Crystian Muro** - Desarrollador del proyecto | 2025.
-- Otras contribuciones pueden agregarse aquí.
+
+---
+## 🤝 Contribuciones
+Las contribuciones son bienvenidas. Por favor abre un issue o pull request con tus sugerencias.
