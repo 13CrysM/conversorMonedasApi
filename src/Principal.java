@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Principal {
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner lectura = new Scanner(System.in);
-        ConsutaMoneda consulta = new ConsutaMoneda();
+        ConsultaMoneda consulta = new ConsultaMoneda();
         String[] divisasObjetivo = {"USD", "EUR", "GBP", "CHF", "JPY", "HKD", "CAD", "CNY", "AUD", "BRL", "RUB", "MXN"};
 
         String menu = ("""
@@ -40,7 +40,7 @@ public class Principal {
                 }
                 // Validación de la clave de la moneda
                 try {
-                    TasasMoneda tasasMoneda = consulta.buscaMoneda(origen);
+                    TasasMoneda tasasMoneda = consulta.buscarMoneda(origen);
                     //System.out.println(tasasMoneda.base_code().equalsIgnoreCase(origen));
                     if (tasasMoneda.base_code().equalsIgnoreCase(origen)) {
                         break; // Moneda válida
@@ -76,20 +76,26 @@ public class Principal {
             }
 
             // Solicitar cantidad a convertir y validación
-            System.out.println("Ingresa la cantidad a convertir:");
-            String cantidadTexto = lectura.nextLine().trim();
             double cantidad;
-            try {
-                cantidad = Double.parseDouble(cantidadTexto);
-            } catch (NumberFormatException e) {
-                System.out.println("Cantidad no válida.");
-                continue;
+            while (true){
+                System.out.println("Ingresa la cantidad a convertir:");
+                String cantidadTexto = lectura.nextLine().trim();
+                try {
+                    cantidad = Double.parseDouble(cantidadTexto);
+                    if (cantidad <= 0) {
+                        System.out.println("La cantidad debe de ser mayor que cero.");
+                        continue;
+                    }
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Cantidad ingresada no es válida." + e);
+                }
             }
 
             // Realiza la conversión
             String destino = divisasObjetivo[indice - 1];
             try {
-                Moneda moneda = consulta.buscaParMonedas(origen, destino);
+                Moneda moneda = consulta.buscarParMonedas(origen, destino);
                 ConversorDivisa conversor = new ConversorDivisa(moneda);
                 double resultado = conversor.convertir(cantidad, destino);
                 System.out.printf("La cantidad de: %.2f %s equivalen a: %.2f %s%n",

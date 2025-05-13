@@ -17,12 +17,14 @@ public class ConversorDivisa {
 
     }
 
-    public double convertir(double cantidad, String destino){
+    public double convertir(double cantidad, String destino) {
         //Double tasa = tasas.get(divisasDestino);
-        if (tasa > 0) {
-            return cantidad * tasa;
-        } else {
-            throw new IllegalArgumentException("No se encontro tasa de destino: " + destino);
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("La cantidad debe ser positiva");
         }
+        if (!this.destino.equals(destino)) {
+            throw new IllegalArgumentException("Divisa destino no coincide");
+        }
+        return cantidad * tasa;
     }
 }
