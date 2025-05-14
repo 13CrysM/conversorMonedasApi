@@ -26,7 +26,7 @@ El sistema se conecta a la API de ExchangeRate-API para obtener los datos más a
 
 ### Pasos para ejecutar:
 
-![Pasos](resources/img-00.png)
+ ![Pasos](resources/img-00.png)
 - **Nota**: _Realizar los ajustes necesarios a tu proyecto._ 
 ---
 
