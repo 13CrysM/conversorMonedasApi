@@ -26,7 +26,7 @@ El sistema se conecta a la API de ExchangeRate-API para obtener los datos más a
 
 ### Pasos para ejecutar:
 
-![Pasos](resources/img-01.png)
+![Pasos](resources/img-00.png)
 - **Nota**: _Realizar los ajustes necesarios a tu proyecto._ 
 ---
 
@@ -42,12 +42,13 @@ El sistema se conecta a la API de ExchangeRate-API para obtener los datos más a
 ---
 
 ## 📷 Capturas de Pantalla
-![Caprura1](resources/img-02.png)
-![Caprura2](resources/img-03.png)
-![Caprura3](resources/img-04.png)
-![Caprura4](resources/img-05.png)
-![Caprura5](resources/img-06.png)
-![Caprura6](resources/img-07.png)
+![Caprura1](resources/img-01.png)
+![Caprura2](resources/img-02.png)
+![Caprura3](resources/img-03.png)
+![Caprura4](resources/img-04.png)
+![Caprura5](resources/img-05.png)
+![Caprura6](resources/img-06.png)
+![Caprura7](resources/img-07.png)
 
 ---
 
