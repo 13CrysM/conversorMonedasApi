@@ -24,10 +24,8 @@ El sistema se conecta a la API de ExchangeRate-API para obtener los datos más a
 1. JDK 17 o superior instalado
 2. Conexión a Internet (para acceder a la API)
 
-### Pasos para ejecutar:
 
- ![Pasos](resources/img-00.png)
-- **Nota**: _Realizar los ajustes necesarios a tu proyecto._ 
+
 ---
 
 ## 🖥️ Uso del Programa
