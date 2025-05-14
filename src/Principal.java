@@ -1,108 +1,80 @@
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.List;
 
 public class Principal {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Scanner lectura = new Scanner(System.in);
+        InterfazUsuario ui = InterfazUsuario.getInstance();
         ConsultaMoneda consulta = new ConsultaMoneda();
-        String[] divisasObjetivo = {"USD", "EUR", "GBP", "CHF", "JPY", "HKD", "CAD", "CNY", "AUD", "BRL", "RUB", "MXN"};
 
-        String menu = ("""
-                1.- Convertir a Dólares Americanos (USD)
-                2.- Convertir a Euros (EUR)
-                3.- Convertir a Libras Esterlinas (GBP)
-                4.- Convertir a Francos Suizos (CHF)
-                5.- Convertir a Yenes Japoneses (JPY)
-                6.- Convertir a Dólares Hongkoneses (HKD)
-                7.- Convertir a Dólares Canadienses (CAD)
-                8.- Convertir a Yuanes Chinos (CNY)
-                9.- Convertir a Dólares Australianos (AUD)
-                10.- Convertir a Reales Brasileños (BRL)
-                11.- Convertir a Rublos Rusos (RUB)
-                12.- Convertir a Pesos Mexicanos (MXN)
-                0.- Salir
-                """);
-
-        System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
-        System.out.println("*- Bienvenido al sistema de conversión de divisas -*");
+        ui.mostrarMensaje("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
+        ui.mostrarMensaje("*- Bienvenido al sistema de conversión de divisas by Crystian Muro-*");
+        ui.mostrarMensaje("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
 
         while (true) {
-            // Solicitar y validar código de divisa origen
-            String origen;
-            while (true) {
-                System.out.println("\nIngresa el código de la divisa ORIGEN (ejemplo: USD, EUR, MXN) o escribe '0' para salir del sistema:");
-                origen = lectura.nextLine().trim().toUpperCase();
+            String[] opcionesPrincipales = {"Realizar conversión de divisas", "Ver historial de conversiones", "Eliminar historial"};
+            int opcion = ui.obtenerOpcionMenu(opcionesPrincipales);
 
-                if (origen.equals("0")) {
-                    System.out.println("¡Gracias por utilizar el conversor de divisas!");
-                    lectura.close();
+            switch (opcion) {
+                case 1:
+                    realizarConversion(ui, consulta);
+                    break;
+                case 2:
+                    mostrarHistorial(ui);
+                    break;
+                case 3:
+                    HistorialConversiones.limpiarHistorial();
+                    break;
+                case 0:
+                    ui.mostrarMensaje("¡Gracias por utilizar el conversor de divisas!");
                     return;
-                }
-                // Validación de la clave de la moneda
-                try {
-                    TasasMoneda tasasMoneda = consulta.buscarMoneda(origen);
-                    //System.out.println(tasasMoneda.base_code().equalsIgnoreCase(origen));
-                    if (tasasMoneda.base_code().equalsIgnoreCase(origen)) {
-                        break; // Moneda válida
-                    } else {
-                        System.out.println("Código de moneda no válido.");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Error al validar el código de moneda: " + e.getMessage());
-                }
+                default:
+                    ui.mostrarError("Opción no válida");
             }
+        }
+    }
 
-            // Menú de selección de moneda destino
-            System.out.println(menu);
-            System.out.println("Selecciona una opción válida (1-12):");
-            String opcion = lectura.nextLine().trim();
-
-            if (opcion.equals("0")) {
-                System.out.println("¡Gracias por utilizar el conversor de divisas!");
-                lectura.close();
+    private static void realizarConversion(InterfazUsuario ui, ConsultaMoneda consulta) {
+        try {
+            // Obtener divisa origen
+            String origen = ui.obtenerTexto("\nIngrese el código de la divisa ORIGEN (ej: USD, EUR, MXN): ").toUpperCase();
+            if (!GestorMonedas.esDivisaValida(origen)) {
+                ui.mostrarError("Divisa no soportada");
                 return;
             }
 
-            int indice;
-            try {
-                indice = Integer.parseInt(opcion);
-                if (indice < 1 || indice > 12) {
-                    System.out.println("Debes ingresar número entre 1 y 12.");
-                    continue;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Opción no válida.");
-                continue;
-            }
+            // Obtener divisa destino
+            ui.mostrarMensaje("\nSeleccione la divisa DESTINO:");
+            int indiceDestino = ui.obtenerOpcionMenu(GestorMonedas.obtenerNombresDivisas());
+            if (indiceDestino == 0) return;
+            String destino = GestorMonedas.divisasObjetivo[indiceDestino - 1];
 
-            // Solicitar cantidad a convertir y validación
-            double cantidad;
-            while (true){
-                System.out.println("Ingresa la cantidad a convertir:");
-                String cantidadTexto = lectura.nextLine().trim();
-                try {
-                    cantidad = Double.parseDouble(cantidadTexto);
-                    if (cantidad <= 0) {
-                        System.out.println("La cantidad debe de ser mayor que cero.");
-                        continue;
-                    }
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Cantidad ingresada no es válida." + e);
-                }
-            }
+            // Obtener cantidad
+            double cantidad = ui.obtenerCantidadPositiva("\nIngrese la cantidad a convertir: ");
 
-            // Realiza la conversión
-            String destino = divisasObjetivo[indice - 1];
-            try {
-                Moneda moneda = consulta.buscarParMonedas(origen, destino);
-                ConversorDivisa conversor = new ConversorDivisa(moneda);
-                double resultado = conversor.convertir(cantidad, destino);
-                System.out.printf("La cantidad de: %.2f %s equivalen a: %.2f %s%n",
-                        cantidad, moneda.base_code(), resultado, destino);
-            } catch (Exception e) {
-                System.out.println("Error con la tasa de cambio: " + e.getMessage());
-            }
+            // Realizar conversión
+            Moneda moneda = consulta.buscarParMonedas(origen, destino);
+            ConversorDivisa conversor = new ConversorDivisa(moneda);
+            double resultado = conversor.convertir(cantidad, destino);
+
+            // Mostrar resultado y guardar en historial
+            ui.mostrarResultadoConversion(cantidad, origen, resultado, destino);
+            HistorialConversiones.agregarConversion(origen, destino, cantidad, resultado, moneda.conversion_rate());
+
+        } catch (Exception e) {
+            ui.mostrarError(e.getMessage());
         }
+    }
+
+    private static void mostrarHistorial(InterfazUsuario ui) {
+        List<String> historial = HistorialConversiones.obtenerHistorial();
+        if (historial.isEmpty()) {
+            ui.mostrarMensaje("\nNo hay conversiones en el historial.");
+            return;
+        }
+
+        ui.mostrarMensaje("\nHistorial de conversiones:");
+        ui.mostrarMensaje("----------------------------------------");
+        historial.forEach(ui::mostrarMensaje);
+        ui.mostrarMensaje("----------------------------------------");
     }
 }
